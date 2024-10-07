@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: app
+    command: >
+      /bin/sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - ./.env
+    volumes:
+      - ./src:/backend
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - upskill_network
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:13
+    container_name: db
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - upskill_network
+    ports:
+      - "5432:5432"
+
+networks:
+  upskill_network:
+    driver: bridge
