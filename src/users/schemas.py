@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional
+from typing import Dict, Optional
 from pydantic import BaseModel, EmailStr
 from config.instance import MALE, FEMALE, DEFAULT
 
@@ -32,8 +32,21 @@ class UserCreateDB(BaseModel):
     sex: str
 
 
+class UserDump(BaseModel):
+    id: int
+    email: str
+    role: str
+    name: str
+    surname: str
+    birthDate: Optional[str] = None
+    sex: str
+    phone: Optional[str] = None
+    city: Optional[str] = None
+    createdAt: str
+
+
 class Token(BaseModel):
-    user_id: int
+    user: UserDump
     access_token: str
     refresh_token: Optional[str] = None
 

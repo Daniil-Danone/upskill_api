@@ -16,7 +16,6 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
-
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
@@ -25,6 +24,7 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_HEADERS = '*'
 CORS_ALLOW_METHODS = '*'
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 INSTALLED_APPS = [

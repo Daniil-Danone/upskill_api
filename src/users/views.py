@@ -5,10 +5,9 @@ from rest_framework.response import Response
 
 from pydantic import ValidationError
 
-from config.instance import TOKEN_TYPE
-from users.schemas import UserCreate, UserLogin, Token, UserUpdate
-from users.serializers import UserDumpSerializer
 from users.service import UserService
+from users.serializers import UserDumpSerializer
+from users.schemas import UserCreate, UserLogin, Token, UserUpdate
 
 from utils import auth as auth_utils
 from utils import tokens as token_utils
@@ -40,7 +39,7 @@ class RegisterUserAPIView(APIView):
         refresh_token = token_utils.create_refresh_token(user=user)
 
         token_data = Token(
-            user_id=user.id,
+            user=UserDumpSerializer(user).data,
             access_token=access_token,
             refresh_token=refresh_token
         )
@@ -82,7 +81,7 @@ class LoginUserAPIView(APIView):
         refresh_token = token_utils.create_refresh_token(user=user)
 
         token_data = Token(
-            user_id=user.id,
+            user=UserDumpSerializer(user).data,
             access_token=access_token,
             refresh_token=refresh_token
         )
@@ -101,7 +100,7 @@ class TokenRefreshAPIView(APIView):
         access_token = token_utils.create_access_token(user=user)
 
         token_data = Token(
-            user_id=user.id,
+            user=UserDumpSerializer(user).data,
             access_token=access_token
         )
 
