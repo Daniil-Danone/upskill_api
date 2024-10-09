@@ -86,7 +86,7 @@ def get_active_current_user(token: str) -> User:
             status_code=status.HTTP_404_NOT_FOUND,
         )
     
-    if not user.is_active:
+    if not user.isActive:
         raise CustomAPIException(
             detail={
                 "message": f"Пользователь {user.id} заблокирован"

@@ -46,7 +46,7 @@ class User(models.Model):
         verbose_name='Фамилия', blank=False, null=False
     )
 
-    birth_date = models.DateTimeField(
+    birthDate = models.DateTimeField(
         verbose_name='Дата рождения', blank=True, null=True,
     )
 
@@ -62,12 +62,12 @@ class User(models.Model):
         verbose_name="Город", blank=True, null=True
     )
 
-    created_at = models.DateTimeField(
+    createdAt = models.DateTimeField(
         verbose_name='Дата регистрации',
         auto_now_add=True
     )
 
-    is_active = models.BooleanField(default=True)
+    isActive = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Пользователь: {self.surname} {self.name} - {self.email}"

@@ -36,7 +36,7 @@ class UserService:
                 password=hashed_password.decode(),
                 name=user_data.name,
                 surname=user_data.surname,
-                birth_date=user_data.birth_date,
+                birthDate=user_data.birthDate,
                 sex=user_data.sex
             )
 

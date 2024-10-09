@@ -7,14 +7,14 @@ class UserDumpSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = [
-            "id", "email", "role", "name", "surname", "birth_date", "sex", "phone", "city", "created_at"
+            "id", "email", "role", "name", "surname", "birthDate", "sex", "phone", "city", "createdAt"
         ]
 
 class UserRegisterSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = [
-            "email", "password", "name", "surname", "birth_date", "sex"
+            "email", "password", "name", "surname", "birthDate", "sex"
         ]
 
 

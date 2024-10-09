@@ -14,7 +14,7 @@ class UserCreate(BaseModel):
     password: str
     name: str
     surname: str
-    birth_date: Optional[str] = None
+    birthDate: Optional[str] = None
     sex: SexEnum = SexEnum.default
 
 
@@ -28,7 +28,7 @@ class UserCreateDB(BaseModel):
     password: str
     name: str
     surname: str
-    birth_date: Optional[str] = None
+    birthDate: Optional[str] = None
     sex: str
 
 
@@ -41,7 +41,7 @@ class Token(BaseModel):
 class UserUpdate(BaseModel):
     name: Optional[str] = None
     surname: Optional[str] = None
-    birth_date: Optional[str] = None
+    birthDate: Optional[str] = None
     sex: Optional[SexEnum] = None
     phone: Optional[str] = None
     city: Optional[str] = None
