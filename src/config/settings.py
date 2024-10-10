@@ -14,11 +14,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
+    "upskill-api.big-nose.ru",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
+    "http://upskill-api.big-nose.ru/",
+    "https://upskill-api.big-nose.ru/"
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
