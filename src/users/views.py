@@ -166,7 +166,7 @@ class UserMeAPIView(APIView):
         )
 
 
-class LogoutAPIView(APIView):
+class LogoutUserAPIView(APIView):
     def get(self, request: Request):
         token = auth_utils.get_token_from_request(request=request)
         user = auth_utils.get_active_current_user(token=token)
