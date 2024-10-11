@@ -69,6 +69,8 @@ class User(models.Model):
 
     isActive = models.BooleanField(default=True)
 
+    isLogin = models.BooleanField(default=False)
+
     def __str__(self):
         return f"Пользователь: {self.surname} {self.name} - {self.email}"
     

@@ -72,7 +72,33 @@ def get_current_user(token: str) -> User:
 def get_current_user_by_refresh(token: str) -> User:
     payload = get_current_token_payload(token=token)
     validate_token(payload=payload, token_type="refresh")
-    return get_user_by_token(payload=payload)
+    user = get_user_by_token(payload=payload)
+
+    if not user:
+        raise CustomAPIException(
+            detail={
+                "message": f"Пользователя не существует"
+            },
+            status_code=status.HTTP_404_NOT_FOUND,
+        )
+    
+    if not user.isActive:
+        raise CustomAPIException(
+            detail={
+                "message": f"Пользователь {user.id} заблокирован"
+            },
+            status_code=status.HTTP_403_FORBIDDEN,
+        )
+    
+    if not user.isLogin:
+        raise CustomAPIException(
+            detail={
+                "message": f"Пользователь не залогинен!"
+            },
+            status_code=status.HTTP_403_FORBIDDEN
+        )
+
+    return user
 
 
 def get_active_current_user(token: str) -> User:
@@ -92,6 +118,14 @@ def get_active_current_user(token: str) -> User:
                 "message": f"Пользователь {user.id} заблокирован"
             },
             status_code=status.HTTP_403_FORBIDDEN,
+        )
+    
+    if not user.isLogin:
+        raise CustomAPIException(
+            detail={
+                "message": f"Пользователь не залогинен!"
+            },
+            status_code=status.HTTP_403_FORBIDDEN
         )
 
     return user

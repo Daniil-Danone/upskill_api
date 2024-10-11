@@ -35,6 +35,9 @@ class RegisterUserAPIView(APIView):
             user_data=user_data
         )
 
+        user.isLogin = True
+        user.save()
+
         access_token = token_utils.create_access_token(user=user)
         refresh_token = token_utils.create_refresh_token(user=user)
 
@@ -77,6 +80,9 @@ class LoginUserAPIView(APIView):
                 status_code=status.HTTP_400_BAD_REQUEST
             )
         
+        user.isLogin = True
+        user.save()
+
         access_token = token_utils.create_access_token(user=user)
         refresh_token = token_utils.create_refresh_token(user=user)
 
@@ -156,5 +162,19 @@ class UserMeAPIView(APIView):
         
         return Response(
             data={"message": "Аккаунт успешно удалён"},
+            status=status.HTTP_200_OK
+        )
+
+
+class LogoutAPIView(APIView):
+    def get(self, request: Request):
+        token = auth_utils.get_token_from_request(request=request)
+        user = auth_utils.get_active_current_user(token=token)
+
+        user.isLogin = False
+        user.save()
+
+        return Response(
+            data={"message": "Вы разлогинены"},
             status=status.HTTP_200_OK
         )
